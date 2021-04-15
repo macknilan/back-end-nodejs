@@ -20,4 +20,8 @@ router.put('/:id', async (req, res) => {
     var datos=await actualizar.actualizar(req.params.id,req.body);
     res.send(datos)
 })
+router.post('/login', async (req, res) => {
+    var datos=await consultar_todo.login(req.body);
+    res.send(datos)
+})
 module.exports=router;
