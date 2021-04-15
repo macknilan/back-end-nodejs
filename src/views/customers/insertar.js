@@ -11,7 +11,7 @@ async function insertar(datos) {
             "name": "",
             "email": "",
             "last_name": "",
-            'adrees':{
+            'address':{
                 "city": "",
                 "state": "",
                 "line1": "",
@@ -43,22 +43,22 @@ async function insertar(datos) {
             new_estructure.phone_number=datos.phone_number;
         }
         if(datos.city != undefined || datos.city != ''){
-            new_estructure.adrees.city=datos.city;
+            new_estructure.address.city=datos.city;
         }
         if(datos.state != undefined || datos.state != ''){
-            new_estructure.adrees.state=datos.state;
+            new_estructure.address.state=datos.state;
         }
         if(datos.line1 != undefined || datos.line1 != ''){
-            new_estructure.adrees.line1=datos.line1;
+            new_estructure.address.line1=datos.line1;
         }
         if(datos.line2 != undefined || datos.line2 != ''){
-            new_estructure.adrees.line2=datos.line2;
+            new_estructure.address.line2=datos.line2;
         }
         if(datos.postal_code != undefined || datos.postal_code != ''){
-            new_estructure.adrees.postal_code=datos.postal_code;
+            new_estructure.address.postal_code=datos.postal_code;
         }
         if(datos.country_code != undefined || datos.country_code != ''){
-            new_estructure.adrees.country_code=datos.country_code;
+            new_estructure.address.country_code=datos.country_code;
         }
         if(mensaje.error){
             return mensaje

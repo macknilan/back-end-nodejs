@@ -10,7 +10,7 @@ async function actualizar(id,columns){
             "name": "",
             "email": "",
             "last_name": "",
-            'adrees':{
+            'address':{
                 "city": "",
                 "state": "",
                 "line1": "",
@@ -42,22 +42,22 @@ async function actualizar(id,columns){
             new_estructure.phone_number=columns.phone_number;
         }
         if(columns.city != undefined || columns.city != ''){
-            new_estructure.adrees.city=columns.city;
+            new_estructure.address.city=columns.city;
         }
         if(columns.state != undefined || columns.state != ''){
-            new_estructure.adrees.state=columns.state;
+            new_estructure.address.state=columns.state;
         }
         if(columns.line1 != undefined || columns.line1 != ''){
-            new_estructure.adrees.line1=columns.line1;
+            new_estructure.address.line1=columns.line1;
         }
         if(columns.line2 != undefined || columns.line2 != ''){
-            new_estructure.adrees.line2=columns.line2;
+            new_estructure.address.line2=columns.line2;
         }
         if(columns.postal_code != undefined || columns.postal_code != ''){
-            new_estructure.adrees.postal_code=columns.postal_code;
+            new_estructure.address.postal_code=columns.postal_code;
         }
         if(columns.country_code != undefined || columns.country_code != ''){
-            new_estructure.adrees.country_code=columns.country_code;
+            new_estructure.address.country_code=columns.country_code;
         }
         if(mensaje.error){
             return mensaje
