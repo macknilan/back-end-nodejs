@@ -1,4 +1,4 @@
-# Back end de scrape a lo mas vendido en amazon
+# Back end en conexion con OpenPay
 
 Despues de aver descargado el proyecto favor de correr el siguiente comando para descargar las dependencias
 
@@ -6,79 +6,74 @@ Despues de aver descargado el proyecto favor de correr el siguiente comando para
 
 Cuando termine de descargar ejecutar el siguiente commando para correr el proyecto.
 
-### `nodemon app.js`
-
-La base de datos que utiliza el proyecto se encuentra en la carpeta db y el archivo base.db
-
-
-
-En el proyecto se encuentra el archivo apps.js dicho archivo es donde podremos observar todo los endpoint solicitados
-
-El primer endpoint utiliza un petodo put /elimnar en esta ocacion utilice un put ya que en mi trabajo actual no acostubro a elimnar o usar metodos delete en las tablas siempre usamos modificar y estados de baja o activos, para consultar el api en el navegador o en algun programa en mi caso uso insomnia es de la siguiente manera.
-
-El proyecto esta corriendo en el puerto 5000
-
-endpoint http://localhost:5000/eliminar metodo : PUT
-
-![image](https://user-images.githubusercontent.com/19189836/111846579-21b73b00-88d5-11eb-82a0-03ef0adef856.png)
-
-El siguiente endpoint es el de consulta normal que nos regresa los datos de la tabla en un select normal
-
-endpoint http://localhost:5000/consultar_normal metodo : GET
-
-![image](https://user-images.githubusercontent.com/19189836/111846741-722e9880-88d5-11eb-8388-e105761adda0.png)
-
-El tercer endpoint es el que realiza una consulta normal pero manipulando los datos de forma como lo solitaron
-
-endpoint http://localhost:5000/consultar_compleja metodo : GET
-
-![image](https://user-images.githubusercontent.com/19189836/111846849-a7d38180-88d5-11eb-9df5-aafa23e13787.png)
-
-El ultimo endpoint es el que hace el scrape a amazon y aguarda los datos en nuestra tabla sqlite de igual forma si se ejecuta mas de una ves el proceso que agurda en la tabla hace un select a la tabla antes de aguardar y compara los registros nuevos de la vista y si ya existen en la tabla ya no lo aguarda esto es para que no tengamos productos duplicados.
-
-endpoint http://localhost:5000/post metodo : POST
-
-![image](https://user-images.githubusercontent.com/19189836/111847341-9ccd2100-88d6-11eb-9e89-78a77c1ef430.png)
-
-Si se ejcuta de nuevo por error o para ver si hay productos nuevos retorna lo siguiente
-
-![image](https://user-images.githubusercontent.com/19189836/111847402-ba9a8600-88d6-11eb-8ee4-3ba79b9ec9d5.png)
-
-todos los endpoint se encuentran en el archivo app.js que esta en la rais del proyecto
-
-# Nuevos enpoint para proyecto personal de ventas
-
-para poder correr el nuevo proyecto solo ejecuta el comando 
-
 ### `npm run test`
 
-Cuando cmienze a correr verificara si existen las dos tablas a usar y si ya existen entonses no las crea
+La base de datos que utiliza el proyecto se encuentra en la carpeta base y el archivo Datos.db
 
-para poder usar los nuevos enpoint se pueden encontrar en la carpeta de router y se consultan de la siguiente manera.
+En el proyecto se encuentra el archivo src/index.js dicho archivo es donde podremos observar todo los endpoint solicitados y a donde podremos realizar las peticiones
 
-para la consulta normal de todos los productos es http://localhost:5000/productos/ methodo:"GET"
+EL primer enpoint es el registro de los clientes en OpenPay
 
-para la consulta de un registro espesifico debemos saber el id http://localhost:5000/productos/1 methodo:"GET"
+endpoint http://localhost:5000/customers/ metodo : POST
 
-para la el nuevo registro http://localhost:5000/productos/ methodo: "POST"
-dicho metodo recibe los siguientes parametros.
-![image](https://user-images.githubusercontent.com/19189836/111894230-1cdab000-89d7-11eb-9f91-064899313b0b.png)
+recibe los siguientes parametros y si algun parametro hace falta retorna el mensaje.
 
-para el poder modifcar algun producto es en http://localhost:5000/productos/1 methodo:"PUT"
-debemos saber el id y pasarlo por la url como en el get y pasar los parametros a modificar
-![image](https://user-images.githubusercontent.com/19189836/111894260-61664b80-89d7-11eb-870f-427be30d85ef.png)
+![image](https://user-images.githubusercontent.com/38164483/114949572-ea29a900-9e16-11eb-8af6-1a1ff5b18cdd.png)
+![image](https://user-images.githubusercontent.com/38164483/114949639-075e7780-9e17-11eb-8f1c-4bd1f4555241.png)
 
-para consultar las ventas o los pagos realizados es http://localhost:5000/pago/ methodo:"GET"
+El siguiente endpoint es el de consultar los clientes que se encuentran en OpenPay
 
-para poder consultar algun pago espesifico es http://localhost:5000/pago/1
+endpoint http://localhost:5000/customers/ metodo : GET
 
-para poder generar un nuevo registro es http://localhost:5000/pago/ methodo:"POST"
-dicho metodo recibe los siguientes parametros.
-![image](https://user-images.githubusercontent.com/19189836/111894313-e3ef0b00-89d7-11eb-8afc-94c3716159cb.png)
+![image](https://user-images.githubusercontent.com/38164483/114949721-31179e80-9e17-11eb-8624-11ed86ba32d1.png)
 
-para realizar las modificaciones de algun pago es http://localhost:5000/pago/1 methodo:"PUT"
-debemos saber el id y pasarlo por la url como en el get y pasar los parametros a modificar
-![image](https://user-images.githubusercontent.com/19189836/111894339-1b5db780-89d8-11eb-98d3-964d552e1b55.png)
+El siguiente endpoint es el de actualizar un registro del cliente que se encuentra en OpenPay
+
+endpoint http://localhost:5000/customers/<id del registro a modificar> metodo : GET
+
+![image](https://user-images.githubusercontent.com/38164483/114949936-b56a2180-9e17-11eb-9784-cd6053578828.png)
+![image](https://user-images.githubusercontent.com/38164483/114949990-c87cf180-9e17-11eb-86a3-102fb112679f.png)
+
+las siguientes rutas son para poder crear usuarios y poder loguearse en el sistema existen 3 usuarios con los que se puede acceder pero igual esta el crud de dicha tabla para poder crear sus propios usuarios
+![image](https://user-images.githubusercontent.com/38164483/114950130-0aa63300-9e18-11eb-9e10-2acfed70bc78.png)
+
+ El primero endpoint es el de dar de alta los usuarios, si algun campo esta vacio de igual forma le retorna la alerta
+ 
+ endpoint http://localhost:5000/usuarios/ metodo : POST
+
+ ![image](https://user-images.githubusercontent.com/38164483/114950196-2e697900-9e18-11eb-81a3-e304f2ff5502.png)
+ ![image](https://user-images.githubusercontent.com/38164483/114950275-4e00a180-9e18-11eb-8f1e-e5b5fdaa291a.png)
+
+El siguiente enpoint es el de actializar informacion de los usuarios.
+
+endpoint http://localhost:5000/usuarios/<id del registro> metodo : PUT
+
+![image](https://user-images.githubusercontent.com/38164483/114950356-74bed800-9e18-11eb-808e-73cebb4f4937.png)
+como vemos en la imagen pasamos el id y el campo a actiializar en este caso actualizamos el dato que creamos anteriormente.
+
+El siguiente enpoint es el de consultar en este metodo de puede usar de dos formas ya sea consultar sobre uno espesifico o sobre toda la tabla
+
+endpoint http://localhost:5000/usuarios/ metodo : GET
+endpoint http://localhost:5000/usuarios/<id del registro> metodo : GET
+  
+primero consultamos sobre todos los registros
+![image](https://user-images.githubusercontent.com/38164483/114950503-d2ebbb00-9e18-11eb-8b19-6bf58e12e1ef.png)
+
+segunda forma de consulta pasamos el id del registro que necesitamos
+![image](https://user-images.githubusercontent.com/38164483/114950534-e860e500-9e18-11eb-9b3f-7df4aebd7667.png)
+enpointes
+
+y por ultimo se creo un enpoint para poder realizar el login en el sistema pasamos el username y la contraseña para poder validar si existen
+
+endpoint http://localhost:5000/usuarios/login/ metodo : POST
+
+realizamos la pruueba con un usuario que no existe
+![image](https://user-images.githubusercontent.com/38164483/114950699-37a71580-9e19-11eb-8966-c1764d96f6f8.png)
+
+Realizamos la siguiente prueba con un usuario que si exista.
+![image](https://user-images.githubusercontent.com/38164483/114950755-5a392e80-9e19-11eb-8055-72579c744ab9.png)
+
+
 
 
 
